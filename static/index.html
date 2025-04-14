@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Book Manager</title></head>
+<body>
+  <h2>Books</h2>
+  <button onclick="getBooks()">Load Books</button>
+  <ul id="bookList"></ul>
+
+  <script>
+    function getBooks() {
+      fetch("https://didactic-orbit-4vjv96pxjjq2qvp6-8080.app.github.dev/books")
+        .then(res => res.json())
+        .then(data => {
+          let list = document.getElementById("bookList");
+          list.innerHTML = "";
+          data.forEach(book => {
+            let li = document.createElement("li");
+            li.innerText = book.title + " by " + book.author;
+            list.appendChild(li);
+          });
+        });
+    }
+  </script>
+</body>
+</html>
